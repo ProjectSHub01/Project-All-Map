@@ -7,7 +7,6 @@ end
 local Kill = function(x, y)
     game:GetService("Players").LocalPlayer.Character.PUNCH.LocalScript.Damage:FireServer(x, y)
 end
-
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
@@ -157,7 +156,7 @@ Main4:AddDropdown("Dropdown", {
 Main4:AddButton({
   Title = "Teleport | วาปไปหาผู้เล่นที่เลือก",
   Callback = function()
-  game:GetService("ReplicatedStorage").RemoteEventA.AED_Remote:FireServer(game.Players[_G.PlayersHee])
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[_G.PlayersHee].Character.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
   end
 })
 Main4:AddButton({
