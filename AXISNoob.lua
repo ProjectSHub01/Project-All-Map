@@ -7,6 +7,20 @@ end
 local Kill = function(x, y)
     game:GetService("Players").LocalPlayer.Character.PUNCH.LocalScript.Damage:FireServer(x, y)
 end
+local Kill2 = function(x, y)
+game:GetService("Players").LocalPlayer.Character.BROKENBOTTLELLv3.LocalScript.Damage:FireServer(x, y, false)
+end
+local Kill3 = function(x, y)
+  local args = {
+    [1] = x,
+    [2] = y
+}
+
+game:GetService("Players").LocalPlayer.Character.PoolcueLv3.LocalScript.Damage:FireServer(unpack(args))
+end
+if game:GetService("ReplicatedStorage"):FindFirstChild("anti_axis") then
+  game:GetService("ReplicatedStorage").anti_axis:Destroy()
+end
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
@@ -79,7 +93,7 @@ Main:AddToggle("nil", {
     end
 })
 Main:AddToggle("nil", {
-    Title = "Rob Money All | ขโมยเงินยกเซิฟ",
+    Title = "loop Kill All| ตายรัวๆยกเซิฟ",
     Default = false,
     Callback = function(Ro)
         _G.Rob = Ro
@@ -89,11 +103,11 @@ spawn(function()
   while wait() do
     pcall(function()
       if _G.Rob then
-      for _, v in pairs(game.Players:GetPlayers()) do
-            if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") then
-                Kill(workspace[v.Name].Humanoid, math.huge)
-              game:GetService("ReplicatedStorage").ReviveSystem.Event:FireServer("Respawn",v)
-            end
+        local localPlayer = game.Players.LocalPlayer
+        for _, v in pairs(game.Players:GetPlayers()) do
+          if v ~= localPlayer and v.Character and v.Character:FindFirstChild("Humanoid") then
+            Kill(workspace[v.Name].Humanoid, math.huge)
+          end
         end
       end
     end)
@@ -104,7 +118,7 @@ Main:AddButton({
     Title = "Kill All",
     Callback = function()
         for _, v in pairs(game.Players:GetPlayers()) do
-            if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") then
+            if v.Character and v.Character:FindFirstChild("Humanoid") then
                 Kill(workspace[v.Name].Humanoid, math.huge)
             end
         end
@@ -113,7 +127,7 @@ Main:AddButton({
 Main2:AddButton({
     Title = "God Mode",
     Callback = function()
-        Kill(game.Players.LocalPlayer.Character.Humanoid, -math.huge)
+        Kill(game.Players.LocalPlayer.Character.Humanoid, -10000000000)
     end
 })
 Main2:AddButton({
@@ -121,7 +135,7 @@ Main2:AddButton({
     Callback = function()
         for _, v in pairs(game.Players:GetPlayers()) do
             if v.Character and v.Character:FindFirstChild("Humanoid") then
-                Kill(workspace[v.Name].Humanoid, -math.huge)
+                Kill(workspace[v.Name].Humanoid, -10000000000)
             end
         end
     end
@@ -191,3 +205,5 @@ oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
     return oldNamecall(self, unpack(args))
 end)
 setreadonly(mt, true)
+
+
